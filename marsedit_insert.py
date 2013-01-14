@@ -11,7 +11,14 @@ from appscript import *
 from osax import OSAX
 import datetime, re
 import optparse
+
+## For logging. Since I typically run this via command scripts activated by 
+## keystrokes you can't use print statements for debugging. A nice technique
+## is to use the logging feature of Python and set it so it is a rotating 
+# log. I use the location in my script but you can use whatever you want.
+
 import logging
+import logging.handlers
 
 LOG_FILE = '/Users/clarkgoble/bin/text/marsedit_insert.log'
 my_log = logging.getLogger('theLog')
@@ -20,29 +27,27 @@ my_log.setLevel(logging.INFO)
 handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=10000, backupCount=10)
 my_log.addHandler(handler)
     
-# inserts text by saving clipboard content and then using clipboard to 
-# insert the text
+# Inserts text by saving clipboard content and then using clipboard to 
+# insert the text. We paste by accessing MarsEdit's menubar.
 
 def insert_text_cb(text):
-
-    my_log.info( "test2" )
     
     sa = OSAX()
-    
+
     # save old clipboard (only text part)
     oldtext = sa.the_clipboard()
     
-    print text
-    
     # put our text on clipboard
     sa.set_the_clipboard_to(text)
-
+ 
     # paste clipboard
-    app(u'System Events').application_processes[u'MarsEdit'].menu_bars[1].menu_bar_items[4].menus[1].menu_items[6].click()
-    
+    ME = app(u'System Events').application_processes[u'MarsEdit']
+    ME.menu_bars[1].menu_bar_items[4].menus[1].menu_items[6].click()
+
     # restore old clipboard 
     # need to pause so we don't replace clipboard before it is pasted
-    time.sleep(1)
+    time.sleep(.5)
+
     sa.set_the_clipboard_to( oldtext )
     
 
@@ -142,6 +147,7 @@ def inserttags():
 # inserts character c into text as if it were a keyboard key
 
 def makekey(c = u"X"):
+    my_log.info("inside makekey")
     insert_text_cb('<span class="keyboardshortcut">' + c + '</span>')
     
 # functions for specially named keys
@@ -175,8 +181,11 @@ def tabkey():
 
 def htmlkey( keyname ):
     try:
+        my_log.info("Try:"+ keyname )
         eval( keyname + "()" )
+        my_log.info("Success:"+keyname )
     except:
+        my_log.info("Except: " + keyname)
         makekey( keyname )
 
 
@@ -190,9 +199,7 @@ if __name__ == '__main__':
     options, args = option_parser.parse_args()
     if len(args) < 1:
         test()
-    
-    my_log.info( "test2" )
-    
+        
     # we need to be in MarsEdit's HTML mode
     
     sethtmlmode()
@@ -200,6 +207,7 @@ if __name__ == '__main__':
     for a in range(len(args)):
         htmlkey( args[a] )
 
+    
     # put us back in rtf mode
     setrtfmode()
             
