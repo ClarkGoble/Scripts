@@ -4,7 +4,14 @@
 ## marsedit_insert.py
 ## --------------
 
-## Inserts HTML text into MarsEdit at the current insertion point
+## Inserts HTML text into MarsEdit at the current insertion point that looks
+## like it is individual keys. It's designed to represent keyboard shortcuts
+## as keys and it's made to be called from a macro program like Quickeys.
+## It requires appscript be installed. To install appscript just type
+## sudo easy_install appscript at the command line.
+##
+## For more information on this script see the posts at Clark's Tech Blog
+## http://www.libertypages.com/clarktech/?p=5830
 
 import string, sys, time, shutil
 from appscript import *

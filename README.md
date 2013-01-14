@@ -7,3 +7,5 @@ the most are MarsEdit, Safari, Mail, BBEdit, Address Book and NetNewsWire. I oft
 with a macro utility like Quickeys or Keyboard Maestro. All of these are oriented around effective workflows.
 I'm storing them here so I can update them without having to update each blog post about them. Hopefully I'll
 slowly move all my scripts here.
+
+At the top of each script should be a link to the post that discusses them.
