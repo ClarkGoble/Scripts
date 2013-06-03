@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+## See http://www.libertypages.com/clarktech/?p=6182 for discussion
+
 from __future__ import print_function
 import string, re
 from appscript import *
@@ -101,6 +103,8 @@ def fix_itunes_names(fix=False):
             track.album.set( newalbum )
             track.artist.set( newartist )
             track.year.set( newdate )
+            comment = u"Original album name: " + album
+            track.comment.set( comment )
         except:
             continue
             
