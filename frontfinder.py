@@ -5,6 +5,7 @@
 ###############################
 #
 # Types the path of the front Finder window
+# Usually used with Keyboard Maestro's text expansions
 
 import sys
 import subprocess

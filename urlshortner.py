@@ -23,13 +23,15 @@ import time
 import bitly_api
 from osax import OSAX
 
-bitlyUserName = '###'
-bitlyAPIKey = '###'
+bitlyUserName = 'user'
+bitlyAPIKey = 'key'
 
 
 def shorten(url):
     bitly = bitly_api.Connection(bitlyUserName, bitlyAPIKey)
     short = bitly.shorten(url)
+    
+    
     return short['url']
 
 
