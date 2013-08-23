@@ -37,6 +37,7 @@ def google_search():
 #     time.sleep(1)
     downkey()
     downkey()
+    downkey()
 #     time.sleep(1)
     cr()
     
