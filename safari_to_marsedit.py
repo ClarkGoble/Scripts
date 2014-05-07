@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ### readkit_to_marsedit.py
-### Creates a post in MarsEdit for the selected post in ReadKit
+### Creates a post in MarsEdit for the current tab in Safari
 
 from appscript import *
 import sys
