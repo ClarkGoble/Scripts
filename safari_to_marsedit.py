@@ -52,7 +52,7 @@ def main():
     create_marsedit_post(title, link)
     
 def test():
-    print get_readkit_info()
+    print get_safari_info()
     
 if __name__ == '__main__':
     main()
